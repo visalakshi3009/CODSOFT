@@ -6,11 +6,12 @@ class RandomNumberGenerator
 	{
 		Scanner sc = new Scanner(System.in);
 		Random rand = new Random();
-		int guess, randNo, flag;
-		int rounds = 0, correct = 0, check = 0;
+		int guess, randNo, flag, range, check;
+		int rounds = 0, correct = 0;
 		int attempts = 5;
 		do
 		{
+			check = 0;
 			rounds++; //To keep track of the number of rounds
 			System.out.println("------ Welcome to the Number Game ------");
 			System.out.println("You have " + attempts + " attempts to guess the correct number");
@@ -25,8 +26,16 @@ class RandomNumberGenerator
 					check = 1; //Flag variable for successful attempts
 					break;
 				}
-				else
+				else{
 					System.out.println("Oops! Wrong guess!");
+					range = randNo - guess;
+					if(Math.abs(range) <= 5)
+						System.out.println("You are close");
+					else if(range < 0)
+						System.out.println("Number entered is too high");
+					else
+						System.out.println("Number entered is too low");
+				}
 			}
 			if(check == 0)
 				System.out.println("\nSorry! You lose!\nThe number was " + randNo); //Random number will be displayed at the end
